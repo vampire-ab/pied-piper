@@ -10,8 +10,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   // const [anonAadhaar] = useAnonAadhaar();
   return (
     <Providers>
-      <Navbar />
-      <Component {...pageProps} />
+      <div className="min-h-screen">
+        <Navbar />
+        <Component {...pageProps} />
+      </div>
     </Providers>
   );
 }

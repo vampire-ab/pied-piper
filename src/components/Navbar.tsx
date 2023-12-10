@@ -5,18 +5,18 @@ import { useEnsAvatar, useEnsName } from "wagmi";
 
 
 export default function Navbar() {
-  const {} = usePeers();
+  const { } = usePeers();
   const { data: ensName } = useEnsName();
   const { data: ensAvatar } = useEnsAvatar();
   return (
     <div className="flex px-7 py-4 h-[100px] justify-between">
       <div className="">
         <div>
-          <div className="welcome">Prove you are a human</div>
+          <div className="welcome text-2xl">Open Science Snapshot</div>
           {/* {JSON.stringify(peers)} */}
         </div>
       </div>
-      
+
       <div>
         <ConnectButton.Custom>
           {({

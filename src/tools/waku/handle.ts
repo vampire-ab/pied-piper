@@ -31,6 +31,7 @@ export async function setWakuRelayFunc() {
 export async function setWakuStoreFunc() {
   const waku = await createLightNode({ defaultBootstrap: true });
   await waku.start();
+  console.log("Connecting to Waku Store...");
   await waitForRemotePeer(waku, [
     Protocols.LightPush,
     Protocols.Store,

@@ -20,17 +20,19 @@ import {
 } from "react-icons/bs";
 import People from "./info/People";
 import SubVideo from "./util/SubVideo";
+import Powerloom from "../Powerloom";
 type Props = {
   roomId: string;
+  isDoc: boolean;
 };
 const date = new Date();
-const Huddle01 = ({ roomId }: Props) => {
+const Huddle01 = ({ roomId, isDoc }: Props) => {
   // const [accessToken, setAccessToken] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isRoomJoined } = useRoom();
   const { isLobbyJoined } = useLobby();
   const [showPeople, setShowPeople] = useState<boolean>(true);
-  useEffect(() => {}, [videoRef]);
+  useEffect(() => { }, [videoRef]);
   return (
     <div className="w-full h-full pb-10 flex flex-col">
       <div className="w-full h-full flex flex-1 px-3">
@@ -46,6 +48,9 @@ const Huddle01 = ({ roomId }: Props) => {
               to join the meet and view other participants
             </div>
           )}
+          <div className="w-[700px] h-full ">
+            <Powerloom />
+          </div>
           <SubVideo videoRef={videoRef} />
         </div>
         {/**Sidebar  */}

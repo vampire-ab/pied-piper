@@ -24,6 +24,7 @@ import { publicProvider } from "wagmi/providers/public";
 import "@/utils/customChains";
 /* <------  Waku Protocol Imports  ------>*/
 import { LightNodeProvider } from "@waku/react";
+import { AnonAadhaarProvider } from "anon-aadhaar-react";
 // Waku node options
 const NODE_OPTIONS = { defaultBootstrap: true };
 
@@ -40,7 +41,7 @@ const { wallets } = getDefaultWallets({
   projectId,
   chains,
 });
-
+const appid = "654842826732141414211684982656954069793860747264";
 const demoAppInfo = {
   appName: "Template",
 };
@@ -71,19 +72,22 @@ export function Providers({ children }: Props) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={{
-          lightMode: lightTheme({ overlayBlur: "small" }),
-          darkMode: darkTheme({ overlayBlur: "small" }),
-        }}
-      >
-        <LightNodeProvider options={NODE_OPTIONS}>
-          {mounted && children}
-        </LightNodeProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <AnonAadhaarProvider _appId={appid} >
+
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider
+          chains={chains}
+          theme={{
+            lightMode: lightTheme({ overlayBlur: "small" }),
+            darkMode: darkTheme({ overlayBlur: "small" }),
+          }}
+        >
+          <LightNodeProvider options={NODE_OPTIONS}>
+            {mounted && children}
+          </LightNodeProvider>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </AnonAadhaarProvider>
   );
 }
 export default Providers;

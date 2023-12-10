@@ -15,9 +15,9 @@ const Powerloom = () => {
             for (let i = 0; i < epochs.length; i++) {
                 const res = await fetchData(epochs[i]);
                 if (res?.activities.length > 0) {
-                    arr1.push({ name: `Day ${i}`, steps: res?.activities[0].steps });
-                    arr2.push({ name: `Day ${i}`, heartRate: res?.activities[0].heartRate });
-                    arr3.push({ name: `Day ${i}`, sleepDuration: res?.activities[0].sleepDuration });
+                    arr1.push({ steps: res?.activities[0].steps });
+                    arr2.push({ heartRate: res?.activities[0].heartRate });
+                    arr3.push({ sleepDuration: res?.activities[0].sleepDuration });
                 }
                 console.log(res);
             }
@@ -27,12 +27,23 @@ const Powerloom = () => {
     }, []);
     console.log(chartData);
     return (
-        <div className='w-[700px] h-full'>
-            {chartData.length > 0 ?
-                <div className='w-full h-full'>
-                    <Chart data={chartData?.arr1} />
-                    <Chart data={chartData?.arr2} />
-                    <Chart data={chartData?.arr3} />
+        <div className=''>
+            {chartData?.arr1?.length > 0 ?
+                <div className=''>
+                    <Carousel autoPlay>
+                        <div>
+
+                            <Chart data={chartData?.arr1} key="steps"/>
+                        </div>
+                        <div>
+
+                            <Chart data={chartData?.arr2} key="heartRate"/>
+                        </div>
+                        <div>
+
+                            <Chart data={chartData?.arr3} key="sleepDuration" />
+                        </div>
+                    </Carousel>
                 </div>
 
                 : <></>}

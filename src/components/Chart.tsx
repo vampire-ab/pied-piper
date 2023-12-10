@@ -3,9 +3,10 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
     from 'react-icons/bs'
 import { /*BarChart, Bar,*/ Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 type Props = {
-    data: any
+    data: any,
+    key: string
 }
-const Chart = ({ data }: Props) => {
+const Chart = ({ data, key }: Props) => {
     console.log("Chart: ", data);
     return (
         <div className='charts'>
@@ -21,8 +22,8 @@ const Chart = ({ data }: Props) => {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <CartesianGrid />
+                    <XAxis />
                     <YAxis />
                     <Tooltip />
                     <Legend />

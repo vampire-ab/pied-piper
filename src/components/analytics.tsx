@@ -10,15 +10,12 @@ type props = {
 }
 const Analytics = ({ data, avg }: props) => {
     return (
-        <main className='main-container'>
-            <div className='main-title'>
-                <h3>DASHBOARD</h3>
-            </div>
+        <main className='main-container'>          
 
             <div className='main-cards'>
                 <div className='card'>
                     <div className='card-inner'>
-                        <h3>HEARTRATE</h3>
+                        <h3>HEART RATE</h3>
                         <BsFillArchiveFill className='card_icon' />
                     </div>
                     <h1>{String(avg.heartRate)}</h1>
@@ -28,7 +25,7 @@ const Analytics = ({ data, avg }: props) => {
                         <h3>AVERAGE SLEEP</h3>
                         <BsFillGrid3X3GapFill className='card_icon' />
                     </div>
-                    <h1>{String(avg.sleepDuration)} hours</h1>
+                    <h1>{String(Math.trunc(avg.sleepDuration))} hours</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
@@ -69,7 +66,7 @@ const Analytics = ({ data, avg }: props) => {
                 </BarChart>
             </ResponsiveContainer> */}
 
-                <Chart data={data} />
+                <Chart data={data} key="steps" />
 
             </div>
         </main>

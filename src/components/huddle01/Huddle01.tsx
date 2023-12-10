@@ -36,7 +36,7 @@ const Huddle01 = ({ roomId, isDoc }: Props) => {
   return (
     <div className="w-full h-full pb-10 flex flex-col">
       <div className="w-full h-full flex flex-1 px-3">
-        <div className="relative flex-1 px-5">
+        <div className="relative flex gap-2 flex-wrap flex-1 px-5">
           {isRoomJoined ? (
             <Room />
           ) : (
@@ -48,9 +48,8 @@ const Huddle01 = ({ roomId, isDoc }: Props) => {
               to join the meet and view other participants
             </div>
           )}
-          <div className="w-[700px] h-full ">
-            <Powerloom />
-          </div>
+          <Powerloom />
+
           <SubVideo videoRef={videoRef} />
         </div>
         {/**Sidebar  */}

@@ -47,7 +47,7 @@ const Patient = ({ isDoctor }: Props) => {
                 const msgTime = new Date();
 
                 msgTime.setTime(time);
-                console.log("Heart Rate: ", num);
+                console.log("Current Heart Rate: ", num);
                 if (num) {
                     try {
 
@@ -68,24 +68,25 @@ const Patient = ({ isDoctor }: Props) => {
             const arr: any = [];
             const epochs = getBlockNumbers()
             let ctr = 0;
+            const avvg = { steps: 0, heartRate: 0, sleepDuration: 0 };
             for (let i = 0; i < epochs.length; i++) {
                 const res = await fetchData(epochs[i]);
                 if (res?.activities.length > 0) {
-                    arr.push({ name: `Day ${i}`, steps: res?.activities[0].steps });
-                    avg.steps += Number(res?.activities[0].steps);
-                    arr.push({ name: `Day ${i}`, heartRate: res?.activities[0].heartRate });
-                    avg.heartRate += Number(res?.activities[0].heartRate);
-                    arr.push({ name: `Day ${i}`, sleepDuration: res?.activities[0].sleepDuration });
-                    avg.sleepDuration += Number(res?.activities[0].sleepDuration);
+                    arr.push({ steps: res?.activities[0].steps });
+                    avvg.steps += Number(res?.activities[0].steps);
+                    arr.push({ heartRate: res?.activities[0].heartRate });
+                    avvg.heartRate += Number(res?.activities[0].heartRate);
+                    arr.push({ sleepDuration: res?.activities[0].sleepDuration });
+                    avvg.sleepDuration += Number(res?.activities[0].sleepDuration);
                     ctr++;
                 }
                 console.log(res);
             }
-            avg.steps /= ctr;
-            avg.heartRate /= ctr;
-            avg.sleepDuration /= (ctr * 60);
-            setAvg(avg);
-            console.log(arr);
+            avvg.steps /= ctr;
+            avvg.heartRate /= ctr;
+            avvg.sleepDuration /= (ctr * 60);
+            setAvg(avvg);
+            console.log(avvg);
             setChartData(arr);
         }
         fetch();
@@ -93,10 +94,14 @@ const Patient = ({ isDoctor }: Props) => {
     console.log(chartData);
     console.log(wakuStoreStatus);
     return (
-        <div>
-            <button onClick={() => {
+        <div >
+            <div className='flex justify-between'>
+
+            <div className='flex'> Dashboard</div>
+            <button className='bg-purple-600 p-3 rounded shadow-lg' onClick={() => {
                 Router.push({ pathname: '/meet/gvb-wigv-wog' })
-            }}>Meet the Doc</button>
+            }}>Meet the Doctor</button>
+            </div>
             <Analytics data={chartData} avg={avg} /></div>
 
     )

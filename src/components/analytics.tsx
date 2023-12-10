@@ -3,14 +3,17 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
     from 'react-icons/bs'
 import { /*BarChart, Bar,*/ Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
-import Chart from './Chart';
+import StepsChart from './StepsChart';
+import HeartChart from './HeartChart';
+import SleepChart from './SleepChart';
+import { Carousel } from 'react-responsive-carousel';
 type props = {
     data: any
     avg: any
 }
 const Analytics = ({ data, avg }: props) => {
     return (
-        <main className='main-container'>          
+        <main className='main-container'>
 
             <div className='main-cards'>
                 <div className='card'>
@@ -44,30 +47,19 @@ const Analytics = ({ data, avg }: props) => {
             </div>
 
             <div className='charts'>
-                {/* <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="heartrate" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-            </ResponsiveContainer> */}
+                <Carousel>
+                    <div>
+                        <StepsChart data={data} key="steps" />
+                    </div>
+                    <div>
 
-                <Chart data={data} key="steps" />
+                        <HeartChart data={data} key="heartRate" />
+                    </div>
+                    <div>
 
+                        <SleepChart data={data} key="sleepDuration" />
+                    </div>
+                </Carousel>
             </div>
         </main>
     )

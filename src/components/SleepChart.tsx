@@ -6,7 +6,7 @@ type Props = {
     data: any,
     key: string
 }
-const Chart = ({ data, key }: Props) => {
+const SleepChart = ({ data, key }: Props) => {
     console.log("Chart: ", data);
     return (
         <div className='charts'>
@@ -27,7 +27,7 @@ const Chart = ({ data, key }: Props) => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="steps" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" dataKey="sleepDuration" stroke="#8884d8" activeDot={{ r: 8 }} />
                     {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
                 </LineChart>
             </ResponsiveContainer>
@@ -35,4 +35,4 @@ const Chart = ({ data, key }: Props) => {
     )
 }
 
-export default Chart
+export default SleepChart

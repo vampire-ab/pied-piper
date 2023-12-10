@@ -1,9 +1,11 @@
 import { fetchData, getBlockNumbers } from '@/utils/powerloomCall';
 import React from 'react'
 import Analytics from './analytics';
-import Chart from './Chart';
+import StepsChart from './StepsChart';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import SleepChart from './SleepChart';
+import HeartChart from './HeartChart';
 const Powerloom = () => {
     const [chartData, setChartData] = React.useState<any>({});
     React.useEffect(() => {
@@ -32,16 +34,13 @@ const Powerloom = () => {
                 <div className=''>
                     <Carousel autoPlay>
                         <div>
-
-                            <Chart data={chartData?.arr1} key="steps"/>
+                            <StepsChart data={chartData.arr1} key="steps" />
                         </div>
                         <div>
-
-                            <Chart data={chartData?.arr2} key="heartRate"/>
+                            <HeartChart data={chartData.arr2} key="heartRate" />
                         </div>
                         <div>
-
-                            <Chart data={chartData?.arr3} key="sleepDuration" />
+                            <SleepChart data={chartData.arr3X} key="sleepDuration" />
                         </div>
                     </Carousel>
                 </div>

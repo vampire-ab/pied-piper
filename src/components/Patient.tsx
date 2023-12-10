@@ -23,6 +23,8 @@ const Patient = ({ isDoctor }: Props) => {
     const [wakuStore, setWakuStore] = React.useState<LightNode | undefined>(undefined);
     const [wakuStoreStatus, setWakuStoreStatus] = React.useState<string>("None");
     const [avg, setAvg] = React.useState<any>({});
+
+    const [chartData, setChartData] = React.useState<any>({});
     React.useEffect(() => {
         if (wakuStoreStatus === "None") {
             // Connect to store and filter node.
@@ -62,21 +64,22 @@ const Patient = ({ isDoctor }: Props) => {
             }, 4000)
         }
     }, [wakuStore, wakuStoreStatus]);
-    const [chartData, setChartData] = React.useState<Array<any>>([]);
     React.useEffect(() => {
         async function fetch() {
-            const arr: any = [];
+            const arr1: any = [];
+            const arr2: any = [];
+            const arr3: any = [];
             const epochs = getBlockNumbers()
             let ctr = 0;
             const avvg = { steps: 0, heartRate: 0, sleepDuration: 0 };
             for (let i = 0; i < epochs.length; i++) {
                 const res = await fetchData(epochs[i]);
                 if (res?.activities.length > 0) {
-                    arr.push({ steps: res?.activities[0].steps });
+                    arr1.push({ steps: res?.activities[0].steps });
                     avvg.steps += Number(res?.activities[0].steps);
-                    arr.push({ heartRate: res?.activities[0].heartRate });
+                    arr2.push({ heartRate: res?.activities[0].heartRate });
                     avvg.heartRate += Number(res?.activities[0].heartRate);
-                    arr.push({ sleepDuration: res?.activities[0].sleepDuration });
+                    arr3.push({ sleepDuration: res?.activities[0].sleepDuration });
                     avvg.sleepDuration += Number(res?.activities[0].sleepDuration);
                     ctr++;
                 }
@@ -87,7 +90,7 @@ const Patient = ({ isDoctor }: Props) => {
             avvg.sleepDuration /= (ctr * 60);
             setAvg(avvg);
             console.log(avvg);
-            setChartData(arr);
+            setChartData([{ arr1 }, { arr2 }, { arr3 }]);
         }
         fetch();
     }, []);
@@ -97,10 +100,10 @@ const Patient = ({ isDoctor }: Props) => {
         <div >
             <div className='flex justify-between'>
 
-            <div className='flex'> Dashboard</div>
-            <button className='bg-purple-600 p-3 rounded shadow-lg' onClick={() => {
-                Router.push({ pathname: '/meet/gvb-wigv-wog' })
-            }}>Meet the Doctor</button>
+                <div className='flex'> Dashboard</div>
+                <button className='bg-purple-600 p-3 rounded shadow-lg' onClick={() => {
+                    Router.push({ pathname: '/meet/gvb-wigv-wog' })
+                }}>Meet the Doctor</button>
             </div>
             <Analytics data={chartData} avg={avg} /></div>
 

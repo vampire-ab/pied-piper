@@ -9,6 +9,8 @@ const Home: NextPage = () => {
     const [isSet, setIsSet] = React.useState(false);
     return (<div className="flex gap-10 items-center justify-center text-3xl">
         {!isSet && <button className="border rounded p-4 hover:bg-slate-600" onClick={() => {
+            setIsDoctor(true);
+            setIsSet(true);
             Router.push({ pathname: "/meet/gvb-wigv-wog", query: { doctor: true } });
         }}>Doctor</button>}
         {!isSet &&
